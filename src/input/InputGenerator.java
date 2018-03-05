@@ -15,7 +15,7 @@ public class InputGenerator {
 	public static void main(String[] args) {
 		InputGenerator ig = new InputGenerator();
 		
-		ig.generateInput("trace_1", 0, 3000, 1000000);
+		ig.generateInput("trace_2", 0, 3000, 100);
 	}
 	
 	public InputGenerator() {
@@ -29,7 +29,7 @@ public class InputGenerator {
 			
 			for (int i = 0; i < numberQtd; i++) {
 				Random random = new Random();
-				writer.write(lowNumber + random.nextInt(highNumber + 1) + "\n");
+				writer.write((lowNumber + random.nextInt(highNumber + 1)) + " " + random.nextInt(100) + " " + "r" + "\n");
 			}
 			
 			writer.close();

@@ -30,12 +30,16 @@ public class Main {
 		algorithms.add(new CScan());
 		
 		List<Integer> bufferSizes = new ArrayList<>();
-		bufferSizes.add(10);
-		bufferSizes.add(50);
+		bufferSizes.add(20);
+		bufferSizes.add(40);
+		bufferSizes.add(60);
+		bufferSizes.add(80);
 		bufferSizes.add(100);
+		bufferSizes.add(120);
+		bufferSizes.add(140);
+		bufferSizes.add(160);
+		bufferSizes.add(180);
 		bufferSizes.add(200);
-		bufferSizes.add(500);
-		bufferSizes.add(1000);
 		
 		Disk disk;
 		BufferedWriter writer = new BufferedWriter(new FileWriter(new File("Output.plot")));
@@ -44,14 +48,16 @@ public class Main {
 		
 		for(DiskAlgorithm alg : algorithms){
 			for(Integer size : bufferSizes){
-				Path inputPath = Paths.get("input/trace_1.txt");
+				Path inputPath = Paths.get("input/trace_2.txt");
 				BufferedReader reader = Files.newBufferedReader(inputPath);
 				
 				String line = "";
 				Deque<Integer> input = new ArrayDeque<>();
 				
 				while((line = reader.readLine()) != null) {
-					input.add(Integer.parseInt(line));
+					String[] splittedLine = line.split(" ");
+					
+					input.add(Integer.parseInt(splittedLine[0]));
 					
 				}
 				
