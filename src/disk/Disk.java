@@ -32,6 +32,7 @@ public class Disk {
 			//check count
 			if(count == 0 && haveInput){
 				if(buffer.add(input.getFirst())){
+					//System.out.println(input);
 					target = null;
 					input.poll();
 					if(input.isEmpty()) haveInput = false;
@@ -45,7 +46,9 @@ public class Disk {
 			}
 			if(target.equals(this.needle.getPosition())){
 				this.buffer.remove(target);
-				target = algorithm.access(this.buffer, this.needle);
+				target = null;
+				continue;
+				//target = algorithm.access(this.buffer, this.needle);
 			}
 			//moving needle
 			if(!target.equals(this.needle.getPosition())){

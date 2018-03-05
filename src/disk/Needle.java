@@ -21,7 +21,7 @@ public class Needle {
 	}
 	
 	public void reset(){
-		this.position = 0;
+		this.position = -1;
 	}
 
 }

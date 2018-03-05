@@ -1,10 +1,16 @@
 package main;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.List;
 
 import algorithms.CScan;
@@ -31,15 +37,26 @@ public class Main {
 		bufferSizes.add(500);
 		bufferSizes.add(1000);
 		
-		
-		
 		Disk disk;
 		BufferedWriter writer = new BufferedWriter(new FileWriter(new File("Output.plot")));
 		StringBuffer output = new StringBuffer();
 		output.append("moves,buffer_size,algorithm\n");
+		
 		for(DiskAlgorithm alg : algorithms){
 			for(Integer size : bufferSizes){
-				disk = new Disk(size, alg, /* INPUT */);
+				Path inputPath = Paths.get("input/trace_1.txt");
+				BufferedReader reader = Files.newBufferedReader(inputPath);
+				
+				String line = "";
+				Deque<Integer> input = new ArrayDeque<>();
+				
+				while((line = reader.readLine()) != null) {
+					input.add(Integer.parseInt(line));
+					
+				}
+				
+				System.out.println("Executando: " + alg.getName() + " Size: " + size);
+				disk = new Disk(size, alg, input);
 				output.append(disk.run().toString() + "\n");
 			}
 		}
