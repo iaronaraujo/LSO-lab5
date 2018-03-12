@@ -13,12 +13,13 @@ import java.util.ArrayList;
 import java.util.Deque;
 import java.util.List;
 
-import algorithms.CScan;
+import algorithms.Scan;
 import algorithms.DiskAlgorithm;
 import algorithms.FCFS;
 import algorithms.SSF;
-import algorithms.Scan;
+import algorithms.CScan;
 import disk.Disk;
+import input.InputStructure;
 
 public class Main {
 
@@ -26,38 +27,38 @@ public class Main {
 		List<DiskAlgorithm> algorithms = new ArrayList<>();
 		algorithms.add(new FCFS());
 		algorithms.add(new SSF());
-		algorithms.add(new Scan());
 		algorithms.add(new CScan());
+		algorithms.add(new Scan());
 		
 		List<Integer> bufferSizes = new ArrayList<>();
+		bufferSizes.add(10);
 		bufferSizes.add(20);
+		bufferSizes.add(30);
 		bufferSizes.add(40);
+		bufferSizes.add(50);
 		bufferSizes.add(60);
+		bufferSizes.add(70);
 		bufferSizes.add(80);
+		bufferSizes.add(90);
 		bufferSizes.add(100);
-		bufferSizes.add(120);
-		bufferSizes.add(140);
-		bufferSizes.add(160);
-		bufferSizes.add(180);
-		bufferSizes.add(200);
 		
 		Disk disk;
-		BufferedWriter writer = new BufferedWriter(new FileWriter(new File("Output.plot")));
+		BufferedWriter writer = new BufferedWriter(new FileWriter(new File("Output4.plot")));
 		StringBuffer output = new StringBuffer();
 		output.append("moves,buffer_size,algorithm\n");
 		
 		for(DiskAlgorithm alg : algorithms){
 			for(Integer size : bufferSizes){
-				Path inputPath = Paths.get("input/trace_2.txt");
+				Path inputPath = Paths.get("input/Trace-4.txt");
 				BufferedReader reader = Files.newBufferedReader(inputPath);
 				
 				String line = "";
-				Deque<Integer> input = new ArrayDeque<>();
+				Deque<InputStructure> input = new ArrayDeque<>();
 				
 				while((line = reader.readLine()) != null) {
 					String[] splittedLine = line.split(" ");
 					
-					input.add(Integer.parseInt(splittedLine[0]));
+					input.add(new InputStructure(Integer.parseInt(splittedLine[0]), Integer.parseInt(splittedLine[1])));
 					
 				}
 				

@@ -5,6 +5,7 @@ import java.util.List;
 
 import algorithms.DiskAlgorithm;
 import buffer.InputBuffer;
+import input.InputStructure;
 import output.Output;
 
 public class Disk {
@@ -13,9 +14,9 @@ public class Disk {
 	private DiskAlgorithm algorithm;
 	private InputBuffer buffer;
 	public static final int N_TRACKS = 3000;
-	private Deque<Integer> input;
+	private Deque<InputStructure> input;
 	
-	public Disk(int bufferSize, DiskAlgorithm algorithm, Deque<Integer> input){
+	public Disk(int bufferSize, DiskAlgorithm algorithm, Deque<InputStructure> input){
 		this.needle = new Needle();
 		this.algorithm = algorithm;
 		this.input = input;
@@ -28,12 +29,14 @@ public class Disk {
 		long moves = 0;
 		Integer target = null;
 		int count = 0;
+		int entryTime = 50;
 		while(haveInput || !buffer.isEmpty()){
 			//check count
 			if(count == 0 && haveInput){
-				if(buffer.add(input.getFirst())){
+				if(buffer.add(input.getFirst().getTrail())){
 					//System.out.println(input);
 					target = null;
+					entryTime = input.getFirst().getTime();
 					input.poll();
 					if(input.isEmpty()) haveInput = false;
 				}
@@ -58,7 +61,7 @@ public class Disk {
 			
 			
 			
-			if(++count == 50) count = 0;
+			if(++count == entryTime) count = 0;
 		}
 		
 		
